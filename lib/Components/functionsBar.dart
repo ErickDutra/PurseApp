@@ -8,51 +8,58 @@ class FunctionsBar extends StatelessWidget {
     return Padding(
 
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Card(
+      child:  Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Card(
             elevation: 4,
             child: Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: _FunctionButton(
                 icon: Icons.send,
                 label: 'Enviar',
-                onTap:  () {
-    Navigator.pushNamed(context, '/send');
-  },
+                onTap: () {
+                  Navigator.pushNamed(context, '/send');
+                },
               ),
             ),
           ),
-          Card(
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Card(
             elevation: 4,
             child: Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: _FunctionButton(
                 icon: Icons.attach_money,
                 label: 'Receber',
-                onTap:  () {
-    Navigator.pushNamed(context, '/receive');
-  },
+                onTap: () {
+                  Navigator.pushNamed(context, '/receive');
+                },
               ),
             ),
           ),
-          Card(
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Card(
             elevation: 4,
             child: Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: _FunctionButton(
                 icon: Icons.arrow_downward,
                 label: 'Depositar',
-                onTap:  () {
-    Navigator.pushNamed(context, '/deposit');
-  },
+                onTap: () {
+                  Navigator.pushNamed(context, '/deposit');
+                },
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
+    ),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:purseapp/Components/analiticBalance.dart';
 import 'package:purseapp/Components/balanceCard.dart';
+import 'package:purseapp/Components/custom_drawer.dart';
 import 'package:purseapp/Components/functionsBar.dart';
+import 'package:purseapp/Pages/LoginPage.dart';
 import 'package:purseapp/Pages/depositPage.dart';
 import 'package:purseapp/Pages/extratusPage.dart';
 import 'package:purseapp/Pages/receivePage.dart';
@@ -22,8 +24,9 @@ class MyApp extends StatelessWidget {
           seedColor: Color.fromARGB(255, 110, 82, 169),
         ),
       ),
-      home: const MyHomePage(title: 'Purse'),
+      home: const LoginPage(),
       routes: {
+        '/home': (context) => const MyHomePage(title: 'Purse'),
         '/extrato':(context) => ExtratusPage(),
         '/send':(context) => SendPage(),
         '/receive':(context) => ReceivePage(),
@@ -52,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text(
             'Purse',
             style: const TextStyle(
-              fontSize: 30,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: 'San Francisco',
               color: Colors.white,
@@ -61,27 +64,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      drawer: Drawer(
+       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 110, 82, 169),
-              ),
-              child: Text('Drawer Header'),
-            ),
+            const CustomDrawerHeader(),
             ListTile(
               title: const Text('Item 1'),
               onTap: () {
-      
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: const Text('Item 2'),
               onTap: () {
-            
                 Navigator.pop(context);
               },
             ),
