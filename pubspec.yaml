@@ -34,6 +34,8 @@ dependencies:
   # qr_code_scanner: ^1.0.1
   qr_code_scanner_plus: ^2.0.10+1
   qr_flutter_new: ^1.0.2
+  shared_preferences: ^2.5.3
+  http: ^1.4.0
   # qr_code_scanner: ^1.0.1
 
   # The following adds the Cupertino Icons font to your application.

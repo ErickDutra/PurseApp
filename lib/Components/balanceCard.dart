@@ -4,8 +4,43 @@ class BalanceCard extends StatelessWidget {
   final double balance;
   final String currency;
 
-  const BalanceCard({Key? key, required this.balance, this.currency = 'R\$'})
-    : super(key: key);
+
+  
+void _getBalance() async {
+  if (_formKey.currentState!.validate()) {
+    final email = _emailController.text.trim();
+    final senha = _senhaController.text.trim();
+
+    final url = Uri.parse('http://10.0.2.2:8082/user/login');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': senha}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final idUser = data['id'];
+      final nome = data['name'];
+      final address = data['address'];
+      final email = data['email'];
+      
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('idUser', idUser);
+      await prefs.setString('name', nome);
+      await prefs.setString('address', address);
+      await prefs.setString('email', email);
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login inválido!')),
+      );
+    }
+  }
+}
+
+
 
   @override
   Widget build(BuildContext context) {

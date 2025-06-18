@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:purseapp/Pages/registerPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,12 +18,41 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _senhaController = TextEditingController();
   bool _obscureText = true;
 
-  void _login() {
-    if (_formKey.currentState!.validate()) {
-      // Aqui você pode adicionar sua lógica de autenticação
+
+
+void _login() async {
+  if (_formKey.currentState!.validate()) {
+    final email = _emailController.text.trim();
+    final senha = _senhaController.text.trim();
+
+    final url = Uri.parse('http://10.0.2.2:8082/user/login');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': senha}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final idUser = data['id'];
+      final nome = data['name'];
+      final address = data['address'];
+      final email = data['email'];
+      
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('idUser', idUser);
+      await prefs.setString('name', nome);
+      await prefs.setString('address', address);
+      await prefs.setString('email', email);
       Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login inválido!')),
+      );
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return 'Informe a senha';
                         }
-                        if (value.length < 6) {
-                          return 'Senha muito curta';
-                        }
+            
                         return null;
                       },
                     ),
