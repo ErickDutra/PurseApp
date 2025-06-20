@@ -27,9 +27,7 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
         IconButton(
           icon: const Icon(Icons.logout, color: Colors.white),
           onPressed: () {
-            // Aqui você pode adicionar a lógica de logout
-            Navigator.of(context).pop(); // Fecha o Drawer
-            // Exemplo: Navigator.of(context).pushReplacementNamed('/login');
+            Navigator.of(context).pop();
           },
         ),
       ],

@@ -130,7 +130,7 @@ void _login() async {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromARGB(255, 110, 82, 169),
                         ),
-                        child: const Text('Entrar'),
+                        child: const Text('Entrar', style: TextStyle(fontSize: 18, color: Colors.white)),
                       ),
                     ),
                     TextButton(

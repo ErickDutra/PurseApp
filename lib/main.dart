@@ -8,6 +8,7 @@ import 'package:purseapp/Pages/depositPage.dart';
 import 'package:purseapp/Pages/extratusPage.dart';
 import 'package:purseapp/Pages/receivePage.dart';
 import 'package:purseapp/Pages/sendPage.dart';
+import 'package:purseapp/Pages/transaction_reciver.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,9 @@ class MyApp extends StatelessWidget {
         '/extrato':(context) => ExtratusPage(),
         '/send':(context) => SendPage(),
         '/receive':(context) => ReceivePage(),
-        '/deposit':(context) => DepositPage()
+        '/deposit':(context) => DepositPage(),
+        '/transactionReceive':(context) => TransactionReciver(),
+        '/login': (context) => const LoginPage(),
       },
     );
   }
@@ -70,16 +73,27 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             const CustomDrawerHeader(),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+            Column(
+              children: [
+                ListTile(
+                  title: const Text('Transações recebidas'),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/transactionReceive');
+                  },
+                ),
             ListTile(
               title: const Text('Item 2'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+              ],
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text('Sair'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/login');
               },
             ),
           ],
